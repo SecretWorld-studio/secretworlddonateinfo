@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret World Donate and Donate Items Info | Донаты и донат предметы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #FF7700;
+            --primary-dark: #E05D00;
+            --primary-light: #FF9E40;
+            --accent: #FF5500;
+            --background: #F5F5F7;
+            --card-bg: #FFFFFF;
+            --text: #333333;
+            --text-light: #666666;
+            --border: #E0E0E0;
+            --success: #4CAF50;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff8f0, #ffe9d9);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo-icon {
+            color: #FFD700;
+            text-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-sub {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            font-weight: normal;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem;
+            border-radius: 50px;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.1rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .tab-btn.active {
+            background-color: white;
+            color: var(--primary-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .tab-btn:hover:not(.active) {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            margin-bottom: 2rem;
+            color: var(--primary-dark);
+            font-size: 2.2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        h1:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .prefix-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .prefix-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 119, 0, 0.1);
+        }
+        
+        .prefix-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-header:before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+        }
+        
+        .card-title {
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .card-price {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-body {
+            padding: 1.8rem;
+        }
+        
+        .card-subtitle {
+            font-size: 1.15rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-light);
+            font-style: italic;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .card-list {
+            list-style-type: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed var(--border);
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .card-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .card-list li::before {
+            content: "▹";
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+            margin-top: 0.2rem;
+        }
+        
+        .feature {
+            background: rgba(255, 119, 0, 0.08);
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1.2rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .feature strong {
+            color: var(--primary-dark);
+        }
+        
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.15rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1.2rem;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 119, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .buy-btn:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .buy-btn:hover:before {
+            left: 100%;
+        }
+        
+        .buy-btn:hover {
+            box-shadow: 0 6px 20px rgba(255, 119, 0, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Items Page Styles */
+        .search-container {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .search-box {
+            flex: 1;
+            padding: 1.1rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 119, 0, 0.2);
+        }
+        
+        .category-filter {
+            padding: 1.1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: white;
+            font-size: 1.05rem;
+            cursor: pointer;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 119, 0, 0.2);
+        }
+        
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.2rem;
+        }
+        
+        .item-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 119, 0, 0.08);
+        }
+        
+        .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        
+        .item-header {
+            background: rgba(255, 119, 0, 0.08);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+        
+        .item-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(255, 119, 0, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+        }
+        
+        .item-body {
+            padding: 1.7rem;
+        }
+        
+        .item-type {
+            display: inline-block;
+            background: #f0f0f0;
+            color: var(--text-light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+        
+        .item-details {
+            margin-bottom: 1.2rem;
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .item-effects {
+            background: rgba(255, 119, 0, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            border-left: 3px solid var(--primary-light);
+        }
+        
+        .item-effects div {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .item-effects div:last-child {
+            margin-bottom: 0;
+        }
+        
+        .effect-icon {
+            margin-right: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .prefix-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 0.6rem;
+            margin-bottom: 0.6rem;
+            box-shadow: 0 3px 8px rgba(255, 119, 0, 0.2);
+        }
+        
+        .no-prefix {
+            display: inline-block;
+            background: #f0f0f0;
+            color: var(--text-light);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-light);
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .no-results i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #333, #222);
+            color: #ddd;
+            padding: 2.5rem;
+            margin-top: 4rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .footer-text {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .dc-rate {
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            margin-top: 0.5rem;
+        }
+        
+        @media (max-width: 900px) {
+            .prefix-grid, .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            
+            .tabs {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .prefix-grid, .items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-dragon"></i>
+                </div>
+                <div class="logo-text">
+                    <span>Secret World Donate and Donate Items Info</span>
+                    <span class="logo-sub">Донаты и эксклюзивные предметы</span>
+                </div>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-page="prefixes">Донаты</button>
+                <button class="tab-btn" data-page="items">Донат-предметы</button>
+            </div>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <!-- Донаты (Киты) -->
+        <div id="prefixes" class="page active">
+            <h1><i class="fas fa-crown"></i> Донаты</h1>
+            <div class="prefix-grid">
+                <!-- KitStart -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">KitStart</div>
+                        <div class="card-price">Бесплатный</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Базовый комплект для новых игроков</div>
+                        <ul class="card-list">
+                            <li>🟤 Кожаный шлем — Прочность I</li>
+                            <li>🟤 Кожаный нагрудник — Защита I</li>
+                            <li>🟤 Кожаные поножи — Прочность I</li>
+                            <li>🟤 Кожаные ботинки — Защита от падения I</li>
+                            <li>⚔ Каменный меч — Острота I</li>
+                            <li>⛏ Каменная кирка — Эффективность I</li>
+                            <li>🪓 Каменный топор — Эффективность I</li>
+                            <li>🥩 Еда: 16 жареной свинины</li>
+                            <li>🪵 64 дубовые доски</li>
+                            <li>⛓ 16 железных слитков</li>
+                            <li>🔥 Огниво</li>
+                            <li>🪣 Ведро воды</li>
+                            <li>🕯 16 факелов</li>
+                            <li>8 сундуков</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Помогает новичкам быстро встать на ноги без вложений
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Hero</div>
+                        <div class="card-price">~1 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Легкий буст для новичков</div>
+                        <ul class="card-list">
+                            <li>⛑ Железный шлем — Защита II</li>
+                            <li>🦺 Железный нагрудник — Защита II, Прочность II</li>
+                            <li>👖 Железные поножи — Прочность II</li>
+                            <li>👢 Железные ботинки — Защита от падения II</li>
+                            <li>⚔ Железный меч — Острота II</li>
+                            <li>⛏ Железная кирка — Эффективность II, Прочность II</li>
+                            <li>🪓 Железный топор — Эффективность II</li>
+                            <li>🍗 32 жареной свинины</li>
+                            <li>⛓ 32 железных слитка</li>
+                            <li>10 сундуков</li>
+                            <li>2 бочки</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Начальный донат с простыми, но сильными предметами для PvP и PvE боёв
+                        </div>
+                        <a href="http://secret-php.pp.ua/shop/secret-world/hero/" class="buy-btn">Купить Донат</a>
+                    </div>
+                </div>
+                
+                <!-- Magister -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Magister</div>
+                        <div class="card-price">~5.92 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Продвинутый буст</div>
+                        <ul class="card-list">
+                            <li>⛑ Железный шлем — Защита III, Прочность II</li>
+                            <li>🦺 Железный нагрудник — Защита III, Прочность III</li>
+                            <li>👖 Железные поножи — Прочность III</li>
+                            <li>👢 Железные ботинки — Защита от падения II</li>
+                            <li>⚔ Алмазный меч — Острота III, Прочность II</li>
+                            <li>⛏ Алмазная кирка — Эффективность III, Прочность II</li>
+                            <li>🪓 Алмазный топор — Эффективность III</li>
+                            <li>🍗 48 жареной говядины</li>
+                            <li>💎 8 алмазов</li>
+                            <li>8 сундуков</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Магический ранг, специализирующийся на чаровании, невидимости и ускоренном развитии
+                        </div>
+                        <a href="http://secret-php.pp.ua/shop/secret-world/magister/" class="buy-btn">Купить Донат</a>
+                    </div>
+                </div>
+                
+                <!-- Imperator -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Imperator</div>
+                        <div class="card-price">~10.23 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Эпический старт</div>
+                        <ul class="card-list">
+                            <li>👑 Золотой шлем — Защита III, Прочность III</li>
+                            <li>🦺 Золотой нагрудник — Защита IV, Прочность III</li>
+                            <li>👖 Золотые поножи — Прочность III</li>
+                            <li>👢 Золотые ботинки — Защита от падения III</li>
+                            <li>⚔ Алмазный меч — Острота IV, Прочность III</li>
+                            <li>⛏ Алмазная кирка — Эффективность IV, Прочность III</li>
+                            <li>🪓 Алмазный топор — Эффективность IV</li>
+                            <li>💎 16 алмазов</li>
+                            <li>🥩 64 стейка</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Баланс между выживаемостью и силой, включает мощные тотемы и зелья защиты
+                        </div>
+                        <a href="http://secret-php.pp.ua/shop/secret-world/imperator/" class="buy-btn">Купить Донат</a>
+                    </div>
+                </div>
+                
+                <!-- Helper -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Helper</div>
+                        <div class="card-price">~18.41 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Полный буст для строителей</div>
+                        <ul class="card-list">
+                            <li>⛑ Алмазный шлем — Защита IV, Прочность III</li>
+                            <li>🦺 Алмазный нагрудник — Защита IV, Прочность IV</li>
+                            <li>👖 Алмазные поножи — Прочность IV</li>
+                            <li>👢 Алмазные ботинки — Защита от падения IV</li>
+                            <li>⚔ Алмазный меч — Острота V, Прочность IV</li>
+                            <li>⛏ Алмазная кирка — Эффективность V, Прочность IV</li>
+                            <li>🪓 Алмазный топор — Эффективность V</li>
+                            <li>💎 32 алмаза</li>
+                            <li>🥩 64 стейка</li>
+                            <li>🧭 Компас</li>
+                            <li>4 бочки</li>
+                            <li>5 ящиков шалкера</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Технический и удобный ранг с инструментами автоматизации, починки и телепортации
+                        </div>
+                        <a href="http://secret-php.pp.ua/shop/secret-world/helper/" class="buy-btn">Купить Донат</a>
+                    </div>
+                </div>
+                
+                <!-- Dragon -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Dragon</div>
+                        <div class="card-price">~31.71 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Легендарный набор</div>
+                        <ul class="card-list">
+                            <li>⛑ Алмазный шлем — Защита V, Прочность IV</li>
+                            <li>🦺 Алмазный нагрудник — Защита V, Прочность IV, ❄ Frost Protection I</li>
+                            <li>👖 Алмазные поножи — Прочность IV</li>
+                            <li>👢 Алмазные ботинки — Защита от падения V, Лёгкость II</li>
+                            <li>⚔ Алмазный меч — Острота V, Добыча III, Прочность IV</li>
+                            <li>⛏ Алмазная кирка — Эффективность V, Удача III, Прочность IV</li>
+                            <li>🪓 Алмазный топор — Эффективность V, Прочность IV</li>
+                            <li>💎 64 алмаза</li>
+                            <li>🥩 64 стейка</li>
+                            <li>8 ящиков шалкера</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Элитный боевой ранг с разрушительными артефактами и тотемами бессмертия
+                        </div>
+                        <a href="http://secret-php.pp.ua/shop/secret-world/dragon/" class="buy-btn">Купить Донат</a>
+                    </div>
+                </div>
+                
+                <!-- Gale -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Gale</div>
+                        <div class="card-price">~37.8 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Осенний ураган возможностей</div>
+                        <ul class="card-list">
+                            <li>⛑ Незеритовый шлем — Защита V, Прочность V</li>
+                            <li>🦺 Незеритовый нагрудник — Защита V, Прочность V, ❄ Frost Protection II</li>
+                            <li>👖 Незеритовые поножи — Прочность V</li>
+                            <li>👢 Незеритовые ботинки — Защита от падения V, Лёгкость II</li>
+                            <li>⚔ Незеритовый меч — Острота V, Прочность V, Добыча III</li>
+                            <li>⛏ Незеритовая кирка — Эффективность V, Удача III, Прочность V</li>
+                            <li>🪓 Незеритовый топор — Эффективность V, Прочность V</li>
+                            <li>🥩 64 золотых яблока</li>
+                            <li>💎 32 незеритовых слитка</li>
+                            <li>2 эндер сундука</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Продвинутый универсальный ранг с управлением стихиями и мощными инструментами
+                        </div>
+                        <!-- Кнопка удалена -->
+                    </div>
+                </div>
+                
+                <!-- Blizzard (Новый донат) -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Blizzard</div>
+                        <div class="card-price">~38 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Зимний легендарный набор для PvP и PvE</div>
+                        <ul class="card-list">
+                            <li>⛑ Незеритовый шлем — Защита V, Прочность V</li>
+                            <li>🦺 Незеритовый нагрудник — Защита V, Прочность V, ❄ Frost Protection I</li>
+                            <li>👖 Незеритовые поножи — Прочность V</li>
+                            <li>👢 Незеритовые ботинки — Защита от падения V, Лёгкость II</li>
+                            <li>⚔ Незеритовый меч — Острота V, Прочность V, Добыча III</li>
+                            <li>⛏ Незеритовая кирка — Эффективность V, Удача III, Прочность V</li>
+                            <li>🪓 Незеритовый топор — Эффективность V, Прочность V</li>
+                            <li>🪄 Незеритовая лопата — Эффективность V, Прочность V</li>
+                            <li>🥩 64 золотых яблока</li>
+                            <li>💎 32 незеритовых слитка</li>
+                            <li>2 эндер сундука</li>
+                            <li>10 сундуков</li>
+                            <li>4 бочки</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Полностью зимний PvP/PvE набор с ледяными эффектами. Топовая броня и инструменты для зимних сражений. Идеально подходит для активных игроков.
+                        </div>
+                        <a href="http://secret-php.pp.ua/shop/secret-world/blizzard/" class="buy-btn">Купить Донат</a>
+                    </div>
+                </div>
+                
+                <!-- Wave -->
+                <div class="prefix-card">
+                    <div class="card-header">
+                        <div class="card-title">Wave</div>
+                        <div class="card-price">~41.5 USD</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-subtitle">Ультра-набор</div>
+                        <ul class="card-list">
+                            <li>⛑ Незеритовый шлем — Защита V, Прочность V</li>
+                            <li>🦺 Незеритовый нагрудник — Защита V, Прочность V, ❄ Frost Protection III</li>
+                            <li>👖 Незеритовые поножи — Прочность V</li>
+                            <li>👢 Незеритовые ботинки — Защита от падения V, Лёгкость II</li>
+                            <li>⚔ Незеритовый меч — Острота V, Добыча III, Прочность V, Починка</li>
+                            <li>⛏ Незеритовая кирка — Эффективность V, Удача III, Починка</li>
+                            <li>🪓 Незеритовый топор — Эффективность V, Прочность V, Починка</li>
+                            <li>💎 64 незеритовых слитка</li>
+                            <li>🥩 64 золотых яблока</li>
+                            <li>2 эндер сундука</li>
+                        </ul>
+                        <div class="feature">
+                            <strong>Особенность:</strong> Высший ранг с командной поддержкой, стихией воды и редкими артефактами исцеления и удачи
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Донат-предметы -->
+        <div id="items" class="page">
+            <h1><i class="fas fa-gem"></i> Донат-предметы</h1>
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-box" placeholder="Поиск по названию или описанию...">
+                <select id="category-filter" class="category-filter">
+                    <option value="all">Все категории</option>
+                    <option value="unique">Уникальные предметы</option>
+                    <option value="tools">Инструменты и механизмы</option>
+                    <option value="potions">Зелья и бафы</option>
+                    <option value="weapons">Оружие</option>
+                </select>
+            </div>
+            <div class="items-grid" id="items-container">
+                <!-- Предметы будут добавляться через JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Secret World</div>
+            <div class="footer-text">
+                <p>© 2025 Secret World. Все права защищены.</p>
+                <p>Эксклюзивные предметы и донаты для вашего игрового опыта в Secret World.</p>
+                <div class="dc-rate">1 DC (Dodicoin) ≈ 0.10 USD</div>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Данные о донат-предметах
+        const itemsData = [
+            // Не входят ни в один донат
+            { name: "Сфера Разума", description: "Увеличивает урон магией и снижает получаемый урон на 10%", price: "12 DC", category: "unique", prefixes: [] },
+            { name: "Кристалл Воина", description: "Даёт Силу II и Сопротивление урону II на 5 минут", price: "10 DC", category: "unique", prefixes: [] },
+            { name: "Шар Грабителя", description: "При убийстве игрока забирает часть его монет (10–20%)", price: "10 DC", category: "unique", prefixes: [] },
+            { name: "Шар Ярости", description: "На 30 сек даёт Скорость II и Силу III, но потом Насыщение −3", price: "8 DC", category: "potions", prefixes: [] },
+            
+            // Hero
+            { name: "Зелье Двойного Урона", description: "Увеличивает весь наносимый урон ×2 на 2 минуты", price: "5 DC", category: "potions", prefixes: ["Hero"] },
+            
+            // Magister
+            { name: "Сфера Мастера", description: "Помещая инструмент внутрь, получает случайные чары и доп. эффект на зелья", price: "7 DC", category: "unique", prefixes: ["Magister"] },
+            { name: "Кристалл Защиты", description: "Аналог Сферы Мастера, но для брони. Улучшает защиту, даёт бонус-чары", price: "7 DC", category: "unique", prefixes: ["Magister"] },
+            { name: "Зелье Тени", description: "Делает игрока невидимым и бесшумным на короткое время", price: "5 DC", category: "potions", prefixes: ["Magister"] },
+            { name: "Амулет Развития", description: "Удваивает получаемый опыт при убийстве мобов, если находится в инвентаре", price: "8 DC", category: "unique", prefixes: ["Magister"] },
+            
+            // Imperator
+            { name: "Тотем Воскрешения", description: "Спасает от смерти (1 раз). Даёт Реген II на 20 сек и Защиту III на 25 сек", price: "10 DC", category: "unique", prefixes: ["Imperator"] },
+            { name: "Настойка Болотного Провидца", description: "Даёт дыхание под водой и ночное зрение", price: "5 DC", category: "potions", prefixes: ["Imperator"] },
+            { name: "Пламенный Осколок", description: "Повышает урон по мобам, когда находится в левой руке", price: "8 DC", category: "unique", prefixes: ["Imperator"] },
+            { name: "Камень Двойного Удара", description: "Шанс нанести двойной урон при атаке (при удержании в левой руке)", price: "10 DC", category: "unique", prefixes: ["Imperator"] },
+            { name: "Эликсир Бессмертия", description: "Даёт неуязвимость на 30 секунд", price: "10 DC", category: "potions", prefixes: ["Imperator"] },
+            
+            // Helper
+            { name: "Инструмент Ремонтника", description: "Бесплатно чинит любой предмет (до 5 раз в день)", price: "10 DC", category: "tools", prefixes: ["Helper"] },
+            { name: "Супер-Печка", description: "Плавит 8 предметов одновременно и без топлива", price: "18 DC", category: "tools", prefixes: ["Helper"] },
+            { name: "Магнит ресурсов", description: "Подбирает предметы в радиусе 10 блоков", price: "11 DC", category: "tools", prefixes: ["Helper"] },
+            { name: "Авто-Печь", description: "Подключается к сундукам и автоматически плавит ресурсы", price: "14 DC", category: "tools", prefixes: ["Helper"] },
+            { name: "Кирка Каменьщика", description: "Копает 3×3 и не ломается", price: "20 DC", category: "tools", prefixes: ["Helper"] },
+            { name: "Телепортатор", description: "Телепортирует на базу или к друзьям (не работает в PvP)", price: "9 DC", category: "tools", prefixes: ["Helper"] },
+            
+            // Dragon
+            { name: "Яблоко Дракона", description: "Сила III, Регенерация II и Скорость II", price: "9 DC", category: "potions", prefixes: ["Dragon"] },
+            { name: "Тотем Бессмертия 2.0", description: "Защита V на 10 сек, Неуязвимость 5 сек + Реген 20 сек", price: "15 DC", category: "unique", prefixes: ["Dragon"] },
+            { name: "Эликсир Абсолюта", description: "Удваивает опыт на 1 час", price: "10 DC", category: "potions", prefixes: ["Dragon"] },
+            { name: "Коралловый Кристалл", description: "Даёт дыхание, огнестойкость и быстрое передвижение в воде", price: "12 DC", category: "unique", prefixes: ["Dragon"] },
+            { name: "Пушка (Лук)", description: "Выпускает 3 стрелы с разбросом", price: "12 DC", category: "weapons", prefixes: ["Dragon"] },
+            { name: "Арбалет Хаоса", description: "Стрелы взрываются при попадании", price: "15 DC", category: "weapons", prefixes: ["Dragon"] },
+            { name: "Фарм-Меч", description: "Наносит урон всем мобам в радиусе 3 блоков", price: "10 DC", category: "weapons", prefixes: ["Dragon"] },
+            
+            // Gale
+            { name: "Вихрь Осени", description: "Осенний артефакт: при ПКМ создаёт поток ветра, поднимающий в воздух на 5–7 блоков (60 сек кд)", price: "12 DC", category: "unique", prefixes: ["Gale"] },
+            { name: "Рандомное Зелье", description: "Даёт случайный мощный баф или дебаф на 2 минуты", price: "8 DC", category: "potions", prefixes: ["Gale"] },
+            { name: "Мультиинструмент Абсолюта", description: "Содержит все инструменты (Shift + ПКМ для переключения режимов)", price: "25 DC", category: "tools", prefixes: ["Gale"] },
+            { name: "Шар Урожая", description: "При ПКМ мгновенно выращивает все растения в радиусе 20 блоков (кд 1 минута)", price: "10 DC", category: "tools", prefixes: ["Gale"] },
+            { name: "Шар Ветра", description: "Даёт скорость III и прыжок II на 2 минуты", price: "10 DC", category: "potions", prefixes: ["Gale"] },
+            { name: "Шар Мороза", description: "Замораживает воду под игроком и замедляет врагов", price: "10 DC", category: "unique", prefixes: ["Gale"] },
+            
+            // Blizzard (новые зимние предметы)
+            { 
+                name: "🗡️ Меч Полярного Дуэлянта", 
+                description: "Специальное зимнее оружие для PvP сражений",
+                price: "15 DC", 
+                category: "weapons", 
+                prefixes: ["Blizzard"],
+                type: "Оружие",
+                effects: [
+                    { icon: "⚔️", text: "Повышенный урон по игрокам" },
+                    { icon: "❄️", text: "Шанс краткого замедления противника" },
+                    { icon: "💥", text: "Ледяные визуальные эффекты при ударах" }
+                ]
+            },
+            { 
+                name: "🧪 Зелье Ледяной Ярости", 
+                description: "Мощное зелье для PvP битв",
+                price: "8 DC", 
+                category: "potions", 
+                prefixes: ["Blizzard"],
+                type: "Зелье (30 сек)",
+                effects: [
+                    { icon: "💪", text: "Увеличение наносимого урона" },
+                    { icon: "⚡", text: "Ускорение атаки" },
+                    { icon: "❄️", text: "Холодное свечение игрока" }
+                ]
+            },
+            { 
+                name: "🧪 Зелье Северного Спокойствия", 
+                description: "Защитное зелье для PvE приключений",
+                price: "8 DC", 
+                category: "potions", 
+                prefixes: ["Blizzard"],
+                type: "Зелье (60 сек)",
+                effects: [
+                    { icon: "❤️", text: "Усиленная регенерация здоровья" },
+                    { icon: "🛡️", text: "Снижение урона от мобов" },
+                    { icon: "⚡", text: "Ускоренное восстановление после боя" }
+                ]
+            },
+            { 
+                name: "🎅 Голова Деда Мороза", 
+                description: "Зимний шлем для PvE сражений",
+                price: "12 DC", 
+                category: "unique", 
+                prefixes: ["Blizzard"],
+                type: "Шлем (только против мобов)",
+                effects: [
+                    { icon: "🛡️", text: "Уменьшение получаемого урона от мобов" },
+                    { icon: "❄️", text: "Шанс заморозить моба при атаке по игроку" },
+                    { icon: "❤️", text: "Пассивная регенерация здоровья" }
+                ]
+            },
+            
+            // Wave
+            { name: "Коралловый Кристалл (спец)", description: "Даёт дыхание, огнестойкость, ускорение в воде", price: "12 DC", category: "unique", prefixes: ["Wave"] },
+            { name: "Рудный Магнит", description: "Притягивает руду в радиусе 8 блоков", price: "10 DC", category: "tools", prefixes: ["Wave"] },
+            { name: "Шрам Увядания", description: "На 3 секунды накладывает Слепоту I и Замедление I на ближайших врагов (в радиусе ~6 блоков).", price: "19 DC", category: "unique", prefixes: ["Wave"] },
+            { name: "Шар Молнии", description: "При ПКМ бьёт молнией по цели впереди (кд 45 сек)", price: "15 DC", category: "unique", prefixes: ["Wave"] },
+            { name: "Сфера Исцеления", description: "Восстанавливает всем союзникам в радиусе 10 блоков до 5 сердец", price: "12 DC", category: "potions", prefixes: ["Wave"] },
+            { name: "Шар Удачи", description: "Увеличивает шанс редкого дропа на 25% на 10 мин", price: "8 DC", category: "unique", prefixes: ["Wave"] }
+        ];
+        
+        // Функция для отображения предметов
+        function displayItems(items) {
+            const container = document.getElementById('items-container');
+            container.innerHTML = '';
+            
+            if (items.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>Ничего не найдено</h3>
+                        <p>Попробуйте изменить критерии поиска</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'item-card';
+                
+                let prefixesHTML = '';
+                if (item.prefixes && item.prefixes.length > 0) {
+                    prefixesHTML = '<div class="prefixes">';
+                    item.prefixes.forEach(prefix => {
+                        prefixesHTML += `<span class="prefix-badge">${prefix}</span>`;
+                    });
+                    prefixesHTML += '</div>';
+                } else {
+                    prefixesHTML = '<div class="prefixes"><span class="no-prefix">Не входит в донат</span></div>';
+                }
+                
+                // Проверяем, есть ли у предмета специальная структура с эффектами
+                let detailsHTML = '';
+                if (item.effects) {
+                    // Формируем HTML для предметов с эффектами (новый формат)
+                    let effectsHTML = '';
+                    item.effects.forEach(effect => {
+                        effectsHTML += `
+                            <div>
+                                <span class="effect-icon">${effect.icon}</span>
+                                <span>${effect.text}</span>
+                            </div>
+                        `;
+                    });
+                    
+                    detailsHTML = `
+                        <div class="item-type">${item.type || 'Предмет'}</div>
+                        <div class="item-details">${item.description}</div>
+                        <div class="item-effects">
+                            ${effectsHTML}
+                        </div>
+                    `;
+                } else {
+                    // Старый формат для существующих предметов
+                    detailsHTML = `
+                        <div class="item-details">${item.description}</div>
+                    `;
+                }
+                
+                card.innerHTML = `
+                    <div class="item-header">
+                        <div class="item-title">${item.name}</div>
+                        <div class="item-price">${item.price}</div>
+                    </div>
+                    <div class="item-body">
+                        ${detailsHTML}
+                        ${prefixesHTML}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+        
+        // Функция для фильтрации предметов
+        function filterItems() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const category = document.getElementById('category-filter').value;
+            
+            let filtered = itemsData;
+            
+            // Фильтрация по категории
+            if (category !== 'all') {
+                filtered = filtered.filter(item => item.category === category);
+            }
+            
+            // Фильтрация по поисковому запросу
+            if (searchTerm) {
+                filtered = filtered.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) || 
+                    item.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            displayItems(filtered);
+        }
+        
+        // Инициализация страницы с предметами
+        function initItemsPage() {
+            displayItems(itemsData);
+            
+            // Добавляем обработчики событий
+            document.getElementById('search-input').addEventListener('input', filterItems);
+            document.getElementById('category-filter').addEventListener('change', filterItems);
+        }
+        
+        // Переключение между страницами
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                // Убираем активный класс у всех кнопок
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Добавляем активный класс текущей кнопке
+                button.classList.add('active');
+                
+                // Скрываем все страницы
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Показываем нужную страницу
+                const pageId = button.getAttribute('data-page');
+                document.getElementById(pageId).classList.add('active');
+                
+                // Если открываем страницу с предметами, инициализируем её
+                if (pageId === 'items') {
+                    initItemsPage();
+                }
+            });
+        });
+        
+        // Инициализация страницы с предметами при загрузке (если она активна)
+        if (document.getElementById('items').classList.contains('active')) {
+            initItemsPage();
+        }
+    </script>
+</body>
+</html>
